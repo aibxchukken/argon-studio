@@ -1284,7 +1284,7 @@ body {
     color: var(--text-muted-gray);
 }
 
-/* Adaptive Breakpoint Engineering Matrix Rules */
+
 @media (max-width: 1024px) {
     .hero-title { font-size: 48px; }
     .about-layout-grid, .metrics-dashboard-grid, .download-wrapper { grid-template-columns: 1fr; gap: 40px; }
@@ -1296,4 +1296,51 @@ body {
     .nav-links { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-base-dark); flex-direction: column; padding: 40px; border-bottom: 1px solid var(--card-glass-border); text-align: center; }
     .nav-links.active { display: flex; }
     .nav-actions { display: none; }
+}
+
+/* --- NEW: Optimized for Short/Small Mobile Screens --- */
+
+@media (max-height: 700px) {
+    /* Reduce Hero padding to fit more content on screen */
+    .hero-section {
+        padding-top: 100px;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: 32px !important;
+        margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    /* Shrink the 3D preview container on small heights to prevent vertical scroll */
+    .hero-preview-container-3d {
+        height: 300px;
+        transform: scale(0.85);
+        margin-top: 0;
+    }
+
+    /* Reduce vertical padding in sections */
+    .section-container {
+        padding: 60px 20px;
+    }
+
+    /* Make buttons and inputs slightly more compact */
+    .btn-primary-action, .btn-secondary-action {
+        padding: 12px 24px;
+    }
+}
+
+/* Mobile-Specific Refinements (Already existing, keeping for context) */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.2rem; }
+    .sub-metrics-grid { grid-template-columns: 1fr 1fr; }
+    .form-row-double { display: flex; flex-direction: column; gap: 10px; }
+    
+    /* Ensure the Download Wrapper fits */
+    .download-wrapper { padding: 30px; }
 }
