@@ -255,7 +255,7 @@ function initPerspectiveLayer3D() {
     });
 }
 
-/* Connect Core Direct Mail Synthesis Strategy Pipeline */
+/* --- FORM SUBMISSION LOGIC --- */
 function initLeadFunnelProcessing() {
     const funnelForm = document.getElementById("argonLeadFunnelForm");
     const modal = document.getElementById("confirmationModal");
@@ -272,52 +272,41 @@ function initLeadFunnelProcessing() {
         const dataTerritory = document.getElementById("clientLocationInput").value.trim();
         const dataScopeNotes = document.getElementById("additionalServicesNotes").value.trim();
         
-        // Admin WhatsApp Number
-        const adminWhatsApp = "918089500239"; 
+        const adminWhatsApp = "918921100239"; 
 
-        // 2. Validate
-        if (!dataIdentity || !contactNum || !dataVector || !dataBudgetTier || !dataTerritory) {
-            alert("Please accurately fulfill all fields.");
-            return;
-        }
+        // 2. Construct WhatsApp Message with your specific structure
+        const messageText = `*ARGON STUDIO — NEW REQUEST*%0A%0A` +
+                            `*Your Full Identity / Brand Name:* ${dataIdentity}%0A` +
+                            `*Contact Number:* ${contactNum}%0A` +
+                            `*Core Operational Vector Selection:* ${dataVector}%0A` +
+                            `*Project Investment Allocation Matrix:* ${dataBudgetTier}%0A` +
+                            `*Deployment Territory Location (Kerala):* ${dataTerritory}%0A` +
+                            `*Additional Structural Requests / Scope Overview:* ${dataScopeNotes}`;
 
-        // 3. Construct WhatsApp Message
-        const whatsappMessage = `*ARGON STUDIO — NEW REQUEST*%0A%0A` +
-                                `*Client:* ${dataIdentity}%0A` +
-                                `*Phone:* ${contactNum}%0A` +
-                                `*Service:* ${dataVector}%0A` +
-                                `*Budget:* ${dataBudgetTier}%0A` +
-                                `*Location:* ${dataTerritory}%0A` +
-                                `*Notes:* ${dataScopeNotes}`;
+        // Store globally to use inside closeModal()
+        window.pendingWhatsAppUrl = `https://wa.me/${adminWhatsApp}?text=${messageText}`;
 
-        // Store the URL in a global variable to trigger on modal close
-        window.pendingWhatsAppUrl = `https://wa.me/${adminWhatsApp}?text=${whatsappMessage}`;
-
-        // 4. Show Modal
+        // 3. Show Modal
         if (modal) {
             modal.style.display = "flex";
             document.getElementById("modalDetails").textContent = 
-                `Thank you, ${dataIdentity}. Click Close to send your request via WhatsApp to Argon Studio.`;
+                `Thank you, ${dataIdentity}. Click Close to open WhatsApp and send your request.`;
         }
     });
 }
 
+/* --- MODAL CLOSE & REDIRECT LOGIC --- */
 function closeModal() {
     const modal = document.getElementById("confirmationModal");
     if (modal) {
         modal.style.display = "none";
-        // 5. Execute WhatsApp Redirect
+        
+        // Check if a URL was generated and open it
         if (window.pendingWhatsAppUrl) {
             window.open(window.pendingWhatsAppUrl, '_blank');
-            window.pendingWhatsAppUrl = null; // Clear it
+            window.pendingWhatsAppUrl = null; // Clear to prevent reuse
         }
     }
-}
-
-// Helper to handle modal closing
-function closeModal() {
-    const modal = document.getElementById("confirmationModal");
-    if (modal) modal.style.display = "none";
 }
 
 /* Dashboard Administrative Simulation Validation Protocol Module */
